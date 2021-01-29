@@ -1,42 +1,51 @@
-import React, {Component} from 'react'
-import Table from './components/Table'
-import Form from './components/Form'
+import React, { Component } from "react";
+import Table from "./components/Table";
+import Form from "./components/Form";
+import store from "./redux/store";
+import { fetchListAction, postItemAction } from "./redux/actionCreators";
 
 class App extends Component {
-  state = {
-    characters: [],
+  constructor(props) {
+    super(props);
+    this.state = store.getState();
+    store.subscribe(this.storeChange) 
   }
-
-  removeCharacter = index => {
-    const { characters } = this.state;
+  componentDidMount() {
+    const action = fetchListAction();
+    store.dispatch(action);
+  }
+  removeData = (index) => {
+    const { list } = this.state;
 
     this.setState({
-        characters: characters.filter((character, i) => { 
-            return i !== index;
-        })
+      list: list.filter((character, i) => {
+        return i !== index;
+      })
     });
-  }
+  };
 
-  handleSubmit = (character) => {
-    this.setState({characters: [...this.state.characters, character]})
-  }
+  handleSubmit = (data) => {
+    // random ID
+    data = {...data,userId:Math.floor(Math.random()*1000)}
+    const action = postItemAction(data);
+    store.dispatch(action);
+  };
 
+  storeChange=()=>{
+    this.setState(store.getState())
+  }
   render() {
-    const { characters } = this.state;
-    
+    const { list } = this.state;
     return (
-        <div className="container">
-            <h1>Simple post</h1>
-            <p>Add a character with a name and a job to the table.</p>
-            <Table
-                characterData={characters}
-                removeCharacter={this.removeCharacter}
-            />
-            <h3>Add New</h3>
-            <Form handleSubmit={this.handleSubmit} />
-        </div>
+      <div className="container">
+        <h1>Simple post</h1>
+        <p>Add a title and body into the table.</p>
+        <Table Data={list} removeData={this.removeData} />
+        <h3>Add New</h3>
+        <Form handleSubmit={this.handleSubmit} />
+      </div>
     );
   }
 }
 
-export default App
+export default App;
