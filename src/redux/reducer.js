@@ -19,13 +19,13 @@ export default function (state = defaultState, action) {
     if (action.type === DELETE_ITEM) {
         const index = action.index;
         let newState = JSON.parse(JSON.stringify(state));
-        newState.list = newState.list.splice(index, 1);
+        newState.list.splice(index, 1);
         return newState;
     }
     // add new item from the list
     if (action.type === ADD_ITEM) {
         const data = action.data;
-        console.dir(data);
+        // console.dir(data);
         let newState = JSON.parse(JSON.stringify(state));
         newState.list.push(data);
         return newState;

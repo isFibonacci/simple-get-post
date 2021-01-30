@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Table from "./components/Table";
 import Form from "./components/Form";
 import store from "./redux/store";
-import { fetchListAction, postItemAction } from "./redux/actionCreators";
+import { deleteItemAction, fetchListAction, postItemAction } from "./redux/actionCreators";
 
 class App extends Component {
   constructor(props) {
@@ -15,14 +15,9 @@ class App extends Component {
     store.dispatch(action);
   }
   removeData = (index) => {
-    const { list } = this.state;
-
-    this.setState({
-      list: list.filter((character, i) => {
-        return i !== index;
-      })
-    });
-  };
+    const  action = deleteItemAction();
+    store.dispatch(action);
+  }
 
   handleSubmit = (data) => {
     // random ID
