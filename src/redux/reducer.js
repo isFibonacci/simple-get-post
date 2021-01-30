@@ -19,6 +19,7 @@ export default function (state = defaultState, action) {
     if (action.type === DELETE_ITEM) {
         const index = action.index;
         let newState = JSON.parse(JSON.stringify(state));
+        console.dir("idex = " + index);
         newState.list.splice(index, 1);
         return newState;
     }
