@@ -41,7 +41,7 @@ export const postItemAction = (data)=>{
         // console.dir(item)
         
         // add into the list
-        const action = addItemAction({...data,id:item})
+        const action = addItemAction({...data,...item})
         dispatch(action)
     }
 }
