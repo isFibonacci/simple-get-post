@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Table from "./components/Table";
 import Form from "./components/Form";
 import store from "./redux/store";
-import { deleteItemAction, fetchListAction, postItemAction } from "./redux/actionCreators";
+import { deleteItemAction, fetchListAction, postItemAction, deleteItemAction} from "./redux/actionCreators";
 
 class App extends Component {
   constructor(props) {
