@@ -11,7 +11,7 @@ class Form extends Component {
         this.state = this.initialState;
     }
 
-    handleChange = event => {
+    handleChange = (event) => {
         const { name, value } = event.target;
 
         this.setState({
@@ -30,6 +30,7 @@ class Form extends Component {
         const { title, body } = this.state; 
         return (
             <form onSubmit={this.onFormSubmit}>
+                {/* reflects the value of the for content property. */}
                 <label htmlFor="title">Title</label>
                 <input 
                     type="text" 

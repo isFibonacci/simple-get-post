@@ -19,7 +19,7 @@ export const fetchListAction = () =>{
     return async (dispatch)=>{
     let data = await fetch('https://jsonplaceholder.typicode.com/posts').then((res)=>{
         return res.json()
-    })
+    }).catch(() => [])
     // take only 10 items
     data = data.slice(0,10);
     const action = getListAction(data)
@@ -39,9 +39,9 @@ export const postItemAction = (data)=>{
             return res.json()
         })
         // console.dir(item)
-        
+
         // add into the list
-        const action = addItemAction({...data,id:item})
+        const action = addItemAction({...data,...item})
         dispatch(action)
     }
 }
